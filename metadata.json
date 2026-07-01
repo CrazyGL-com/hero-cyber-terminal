@@ -1,0 +1,392 @@
+{
+  "name": "Cyber Terminal",
+  "slug": "cyber-terminal",
+  "version": 1,
+  "description": "A terminal/code-editor screenshot floats at the centre, surrounded by drifting command fragments, glowing syntax particles and a pointer-driven matrix-green cursor trail.",
+  "dependencies": [
+    "three"
+  ],
+  "authorName": "@ybouane",
+  "authorUrl": "https://x.com/ybouane",
+  "tags": [
+    "terminal",
+    "code",
+    "developer",
+    "matrix",
+    "particles",
+    "screenshot",
+    "three",
+    "cli",
+    "hacker",
+    "devtools"
+  ],
+  "category": "Product",
+  "featured": true,
+  "poster": "/images/heroes/cyber-terminal.png",
+  "install": {
+    "package": "@crazygl/hero-cyber-terminal"
+  },
+  "config": {
+    "managedWidth": true,
+    "innerWidth": 1100,
+    "managedHeight": true,
+    "defaultHeight": 760,
+    "styleInheritance": "none",
+    "usesCanvas": true,
+    "usesWebGL": true,
+    "usesThree": true,
+    "pointerTracking": true,
+    "resizeTracking": true,
+    "interactive": true,
+    "supportsImages": true,
+    "supportsFontCustomization": true,
+    "interactivityModes": [
+      "pointer",
+      "none"
+    ],
+    "interactivity": "pointer"
+  },
+  "customizer": {
+    "sections": [
+      {
+        "label": "Content",
+        "fields": [
+          {
+            "id": "contentType",
+            "label": "Content Type",
+            "type": "select",
+            "default": "heading",
+            "options": [
+              {
+                "label": "Heading",
+                "value": "heading"
+              },
+              {
+                "label": "Two Columns",
+                "value": "two-columns"
+              },
+              {
+                "label": "Custom",
+                "value": "custom"
+              }
+            ]
+          },
+          {
+            "id": "heading",
+            "label": "Heading",
+            "type": "text",
+            "default": "Ship it.",
+            "showWhen": {
+              "contentType": "heading"
+            }
+          },
+          {
+            "id": "subheading",
+            "label": "Subheading",
+            "type": "textarea",
+            "default": "Built for developers who don't have time for slow.",
+            "showWhen": {
+              "contentType": "heading"
+            }
+          },
+          {
+            "id": "column1",
+            "label": "Column 1",
+            "type": "node",
+            "default": "<h2>Deploy fast</h2><p>Pipelines that move at the speed of thought.</p>",
+            "showWhen": {
+              "contentType": "two-columns"
+            }
+          },
+          {
+            "id": "column2",
+            "label": "Column 2",
+            "type": "node",
+            "default": "<h2>Stay sharp</h2><p>Logs, metrics and tracing in one console.</p>",
+            "showWhen": {
+              "contentType": "two-columns"
+            }
+          },
+          {
+            "id": "content",
+            "label": "Content",
+            "type": "node",
+            "default": "<h1>Ship it.</h1>",
+            "showWhen": {
+              "contentType": "custom"
+            }
+          }
+        ]
+      },
+      {
+        "label": "Screenshot",
+        "fields": [
+          {
+            "id": "screenshot",
+            "label": "Screenshot",
+            "type": "media",
+            "default": "https://crazygl.com/samples/screenshot-dashboard-dark-2.avif",
+            "description": "Use a terminal or code-editor screenshot for best fit."
+          },
+          {
+            "id": "screenshotX",
+            "label": "Screenshot X offset",
+            "type": "slider",
+            "default": 0,
+            "min": -2,
+            "max": 2,
+            "step": 0.05,
+            "unit": "world",
+            "description": "Horizontal position of the screenshot."
+          },
+          {
+            "id": "screenshotY",
+            "label": "Screenshot Y offset",
+            "type": "slider",
+            "default": 0,
+            "min": -2,
+            "max": 2,
+            "step": 0.05,
+            "unit": "world",
+            "description": "Vertical position of the screenshot."
+          },
+          {
+            "id": "screenshotScale",
+            "label": "Screenshot scale",
+            "type": "slider",
+            "default": 1.0,
+            "min": 0.5,
+            "max": 1.6,
+            "step": 0.05,
+            "description": "Size of the screenshot. 0.9-1.1 is the cinematic sweet spot."
+          },
+          {
+            "id": "screenshotTilt",
+            "label": "Screenshot tilt",
+            "type": "slider",
+            "default": -8,
+            "min": -45,
+            "max": 45,
+            "step": 0.5,
+            "unit": "\u00b0",
+            "description": "Forward/back tilt of the screenshot in degrees."
+          },
+          {
+            "id": "screenEmissive",
+            "label": "Screen glow",
+            "type": "slider",
+            "default": 0.6,
+            "min": 0,
+            "max": 1.2,
+            "step": 0.05,
+            "description": "How brightly the screen emits. 0.5-0.8 reads as a real backlit display."
+          }
+        ]
+      },
+      {
+        "label": "Command fragments",
+        "fields": [
+          {
+            "id": "fragmentCount",
+            "label": "Fragment count",
+            "type": "slider",
+            "default": 22,
+            "min": 0,
+            "max": 40,
+            "step": 2,
+            "description": "Number of drifting command/log text fragments."
+          },
+          {
+            "id": "commands",
+            "label": "Commands",
+            "type": "textarea",
+            "default": "$ deploy --prod\ngit push origin main\nnpm install\n> Compiled successfully in 2.3s\n> 200 OK \u00b7 142ms\nkubectl apply -f infra.yaml\ndocker build -t app:v1.2 .\n[INFO] Deployed to us-east-2\nssh deploy@prod.example\ncurl -X POST /api/run\nfunction compile() {\nconst result = await run();\n> All tests passed (482)\n> Healthy \u2713",
+            "description": "One command per line. Each line becomes one drifting fragment, cycling through the pool. Programmatically accepts a string or string[]."
+          },
+          {
+            "id": "fragmentColor1",
+            "label": "Fragment color (green)",
+            "type": "color",
+            "default": "#56ffa0",
+            "description": "Primary terminal-green color for command fragments."
+          },
+          {
+            "id": "fragmentColor2",
+            "label": "Fragment color (cyan)",
+            "type": "color",
+            "default": "#56e3ff",
+            "description": "Secondary cyan color."
+          },
+          {
+            "id": "fragmentColor3",
+            "label": "Fragment color (amber)",
+            "type": "color",
+            "default": "#ffb45a",
+            "description": "Accent amber/warning color."
+          },
+          {
+            "id": "fragmentSpeed",
+            "label": "Fragment speed",
+            "type": "slider",
+            "default": 0.3,
+            "min": 0,
+            "max": 1,
+            "step": 0.02,
+            "description": "Drift speed of command fragments."
+          }
+        ]
+      },
+      {
+        "label": "Particles",
+        "fields": [
+          {
+            "id": "particleCount",
+            "label": "Particle count",
+            "type": "slider",
+            "default": 300,
+            "min": 50,
+            "max": 600,
+            "step": 10,
+            "description": "Number of glowing syntax particles drifting near the screenshot."
+          },
+          {
+            "id": "particleColor1",
+            "label": "Particle color (green)",
+            "type": "color",
+            "default": "#56ffa0"
+          },
+          {
+            "id": "particleColor2",
+            "label": "Particle color (cyan)",
+            "type": "color",
+            "default": "#56e3ff"
+          },
+          {
+            "id": "particleColor3",
+            "label": "Particle color (amber)",
+            "type": "color",
+            "default": "#ffb45a"
+          },
+          {
+            "id": "particlePull",
+            "label": "Particle pull",
+            "type": "slider",
+            "default": 0.4,
+            "min": 0,
+            "max": 1,
+            "step": 0.02,
+            "description": "How strongly particles drift toward the terminal."
+          }
+        ]
+      },
+      {
+        "label": "Cursor trail",
+        "fields": [
+          {
+            "id": "cursorTrailEnabled",
+            "label": "Enable cursor trail",
+            "type": "toggle",
+            "default": true,
+            "description": "Leaves a fading matrix-green trail behind the pointer."
+          },
+          {
+            "id": "cursorTrailColor",
+            "label": "Cursor trail color",
+            "type": "color",
+            "default": "#56ffa0",
+            "showWhen": {
+              "cursorTrailEnabled": true
+            }
+          },
+          {
+            "id": "cursorTrailLength",
+            "label": "Cursor trail length",
+            "type": "slider",
+            "default": 24,
+            "min": 5,
+            "max": 50,
+            "step": 1,
+            "description": "Number of pointer samples retained in the trail.",
+            "showWhen": {
+              "cursorTrailEnabled": true
+            }
+          }
+        ]
+      },
+      {
+        "label": "Atmosphere",
+        "fields": [
+          {
+            "id": "haloColor",
+            "label": "Halo color",
+            "type": "color",
+            "default": "#56ffa0",
+            "description": "Soft additive glow behind the terminal screenshot."
+          },
+          {
+            "id": "haloStrength",
+            "label": "Halo strength",
+            "type": "slider",
+            "default": 0.4,
+            "min": 0,
+            "max": 1,
+            "step": 0.02
+          },
+          {
+            "id": "bgColor",
+            "label": "Background color",
+            "type": "color",
+            "default": "#020410",
+            "description": "Deepest background tint."
+          },
+          {
+            "id": "gridStrength",
+            "label": "Grid strength",
+            "type": "slider",
+            "default": 0.04,
+            "min": 0,
+            "max": 0.2,
+            "step": 0.005,
+            "description": "Subtle background grid pattern strength."
+          },
+          {
+            "id": "transparentBackground",
+            "label": "Transparent background",
+            "type": "toggle",
+            "default": false,
+            "description": "Drop the dark backdrop so the hero blends into the surrounding page."
+          }
+        ]
+      },
+      {
+        "label": "Motion",
+        "fields": [
+          {
+            "id": "parallaxStrength",
+            "label": "Parallax strength",
+            "type": "slider",
+            "default": 0.4,
+            "min": 0,
+            "max": 1,
+            "step": 0.02,
+            "description": "How much the camera/scene reacts to pointer movement."
+          }
+        ]
+      },
+      {
+        "label": "Typography",
+        "fields": [
+          {
+            "id": "headingFontFamily",
+            "label": "Heading Font",
+            "type": "font",
+            "default": "Inherit",
+            "showWhen": {
+              "contentType": "heading"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
