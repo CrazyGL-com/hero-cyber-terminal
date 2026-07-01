@@ -3,7 +3,7 @@ name: cyber-terminal
 description: "A terminal/code-editor screenshot floats at the centre, surrounded by drifting command fragments, glowing syntax particles and a pointer-driven matrix-green cursor trail."
 metadata:
   author: "@ybouane"
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 ## How To Use This Skill
